@@ -1,0 +1,730 @@
+<r<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Happy Birthday, Sanjuuu 🎂</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Dancing+Script:wght@600;700&family=Lato:wght@300;400&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --rose:   #e8295b;
+    --deep:   #9b1237;
+    --blush:  #f7c5d3;
+    --gold:   #f4c542;
+    --dark:   #1a0510;
+    --shadow: rgba(232,41,91,0.35);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Lato', sans-serif;
+    background: var(--dark);
+    color: #fff;
+    overflow: hidden;
+    height: 100vh;
+    width: 100vw;
+    user-select: none;
+  }
+
+  /* ── SCREENS ── */
+  .screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.8s ease;
+    z-index: 1;
+  }
+  .screen.active { opacity: 1; pointer-events: all; }
+
+  /* ── PARTICLES ── */
+  #particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .particle { position: absolute; border-radius: 50%; animation: floatUp linear infinite; opacity: 0.6; }
+  @keyframes floatUp {
+    0%   { transform: translateY(110vh) rotate(0deg); opacity: 0.7; }
+    100% { transform: translateY(-10vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ═══════════════ SCREEN 1: WELCOME ═══════════════ */
+  #s-welcome {
+    background: radial-gradient(ellipse at 50% 40%, #3d0520 0%, #1a0510 70%);
+    z-index: 10;
+    text-align: center;
+    gap: 1.4rem;
+  }
+  .heart-burst { font-size: 4rem; animation: heartbeat 1.2s ease-in-out infinite; }
+  @keyframes heartbeat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.25);} }
+  .welcome-pre {
+    font-weight: 300; font-size: 1rem; letter-spacing: 0.5em;
+    text-transform: uppercase; color: var(--blush);
+    animation: fadeSlideUp 1s 0.3s both;
+  }
+  .welcome-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: #fff; line-height: 1;
+    animation: fadeSlideUp 1s 0.6s both;
+  }
+  .welcome-sub {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.2rem, 3vw, 2rem);
+    color: var(--gold); font-style: italic;
+    animation: fadeSlideUp 1s 0.9s both;
+  }
+  .name-reveal {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    color: var(--rose);
+    animation: fadeSlideUp 1s 1.2s both, glowPulse 2s 2.5s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%,100% { text-shadow: 0 0 20px var(--shadow); }
+    50%      { text-shadow: 0 0 50px var(--rose), 0 0 80px var(--rose); }
+  }
+  @keyframes fadeSlideUp {
+    from { opacity:0; transform: translateY(30px); }
+    to   { opacity:1; transform: translateY(0); }
+  }
+  .btn-start {
+    margin-top: 1rem;
+    padding: 0.9rem 3rem;
+    background: linear-gradient(135deg, var(--rose), var(--deep));
+    border: none; border-radius: 50px; color: #fff;
+    font-size: 1rem; letter-spacing: 0.15em; text-transform: uppercase;
+    cursor: pointer; box-shadow: 0 8px 30px var(--shadow);
+    animation: fadeSlideUp 1s 1.9s both;
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .btn-start:hover { transform: translateY(-3px); box-shadow: 0 12px 40px var(--shadow); }
+
+  /* ═══════════════ SCREEN 2: COUNTDOWN ═══════════════ */
+  #s-countdown {
+    background: radial-gradient(ellipse at 50% 50%, #2a0416 0%, #0d0208 100%);
+    z-index: 9; gap: 0.8rem; text-align: center;
+  }
+  .countdown-label {
+    font-weight: 300; letter-spacing: 0.4em; text-transform: uppercase;
+    color: var(--blush); font-size: 1rem;
+  }
+  .countdown-name {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 5vw, 3.5rem); color: var(--gold);
+  }
+  #countdown-number {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(8rem, 25vw, 15rem);
+    color: var(--rose); line-height: 1;
+    text-shadow: 0 0 60px var(--shadow);
+    transition: transform 0.15s ease;
+  }
+  .countdown-sub { font-size: 0.95rem; color: var(--blush); letter-spacing: 0.25em; }
+
+  /* ═══════════════ SCREEN 3: PUZZLE ═══════════════ */
+  #s-puzzle {
+    background: radial-gradient(ellipse at 50% 30%, #2d0a1a 0%, #0d0208 100%);
+    z-index: 8; gap: 0.8rem;
+  }
+  #s-puzzle h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--gold); text-align: center;
+  }
+  #s-puzzle .sub { color: var(--blush); font-size: 0.9rem; letter-spacing: 0.08em; text-align: center; }
+  #puzzle-container {
+    display: grid; grid-template-columns: repeat(4, 80px);
+    gap: 3px; background: #0d0208;
+    border: 2px solid var(--deep); border-radius: 8px;
+    box-shadow: 0 0 40px var(--shadow); touch-action: none;
+    padding: 3px;
+  }
+  .puzzle-slot {
+    width: 80px; height: 80px;
+    border: 1px solid rgba(232,41,91,0.2);
+    background: rgba(232,41,91,0.05);
+    border-radius: 3px; position: relative;
+  }
+  .puzzle-slot.correct-slot {
+    border-color: var(--gold);
+    box-shadow: inset 0 0 12px rgba(244,197,66,0.35);
+  }
+  .puzzle-piece {
+    position: absolute; width: 80px; height: 80px;
+    cursor: grab; border-radius: 3px; z-index: 5;
+  }
+  .puzzle-piece.dragging { opacity: 0.85; z-index: 200; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+  #puzzle-hint {
+    font-family: 'Playfair Display', serif; font-style: italic;
+    color: var(--rose); font-size: 0.85rem; text-align: center; min-height: 1.2rem;
+  }
+
+  /* ═══════════════ SCREEN 4: KEY HUNT ═══════════════ */
+  #s-keyhunt {
+    background: radial-gradient(ellipse at 30% 60%, #1e0812 0%, #080108 100%);
+    z-index: 7; gap: 0.9rem;
+  }
+  #s-keyhunt h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.8rem, 4vw, 2.5rem); color: var(--gold); text-align: center;
+  }
+  #s-keyhunt .sub { color: var(--blush); font-size: 0.88rem; text-align: center; max-width: 400px; }
+  #keyhunt-area {
+    position: relative; width: min(90vw, 520px); height: 300px;
+    background: radial-gradient(ellipse at 50% 50%, #2a0e1c, #0d0208);
+    border: 1px solid rgba(232,41,91,0.3); border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(0,0,0,0.6), inset 0 0 60px rgba(0,0,0,0.4);
+  }
+  .room-object {
+    position: absolute; cursor: pointer; font-size: 2.2rem;
+    transition: transform 0.2s, filter 0.2s;
+    animation: wobble 3s ease-in-out infinite;
+  }
+  .room-object:hover { transform: scale(1.25) !important; filter: brightness(1.6); }
+  @keyframes wobble { 0%,100%{transform:rotate(-3deg);} 50%{transform:rotate(3deg);} }
+  #key-sprite {
+    position: absolute; font-size: 2rem; cursor: default; display: none; z-index: 10;
+    animation: keyFloat 2s ease-in-out infinite, keyGlow 1.5s ease-in-out infinite;
+  }
+  @keyframes keyFloat { 0%,100%{transform:translateY(0) rotate(-10deg);} 50%{transform:translateY(-8px) rotate(10deg);} }
+  @keyframes keyGlow  { 0%,100%{filter:drop-shadow(0 0 6px gold);} 50%{filter:drop-shadow(0 0 18px gold) brightness(1.4);} }
+  .found-msg { color: var(--gold); font-family:'Playfair Display',serif; font-style:italic; font-size:0.95rem; text-align:center; min-height:1.4rem; }
+  #btn-use-key {
+    display: none; padding: 0.8rem 2.5rem;
+    background: linear-gradient(135deg, var(--gold), #c8920a);
+    border: none; border-radius: 50px; color: var(--dark);
+    font-weight: 700; font-size: 1rem; letter-spacing: 0.1em;
+    cursor: pointer; box-shadow: 0 6px 24px rgba(244,197,66,0.5);
+    transition: transform 0.2s;
+  }
+  #btn-use-key:hover { transform: translateY(-3px); }
+
+  /* ═══════════════ BOX OPEN OVERLAY ═══════════════ */
+  #box-screen {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.93);
+    z-index: 999; display: none;
+    flex-direction: column; align-items: center; justify-content: center; gap: 1.5rem;
+  }
+  #box-anim { font-size: 8rem; animation: boxShake 0.5s ease-in-out 3, boxOpen 0.6s 1.7s forwards; }
+  @keyframes boxShake { 0%,100%{transform:rotate(0);} 25%{transform:rotate(-8deg);} 75%{transform:rotate(8deg);} }
+  @keyframes boxOpen  { to { transform:scale(1.5); filter:brightness(2.5); opacity:0; } }
+  #box-screen .box-msg {
+    font-family: 'Dancing Script', cursive; font-size: 2rem; color: var(--gold);
+    animation: fadeSlideUp 0.7s both;
+  }
+
+  /* ═══════════════ SCREEN 5: VIDEO ═══════════════ */
+  #s-video { background: #000; z-index: 6; gap: 1.2rem; }
+  #s-video h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem); color: var(--gold); text-align: center;
+  }
+  #birthday-video {
+    width: min(90vw, 720px); max-height: 55vh;
+    border-radius: 12px; box-shadow: 0 0 50px var(--shadow);
+    border: 2px solid var(--deep); display: none;
+  }
+  #video-placeholder {
+    width: min(90vw, 720px); height: 300px;
+    border-radius: 12px; border: 2px dashed var(--deep);
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    color: var(--blush); gap: 0.8rem;
+    background: rgba(255,255,255,0.02);
+  }
+  #video-placeholder .big-icon { font-size: 4rem; }
+  #video-placeholder p { font-size: 0.88rem; text-align: center; max-width: 300px; }
+  #btn-skip-video {
+    padding: 0.65rem 2rem; background: transparent;
+    border: 1px solid var(--deep); border-radius: 50px;
+    color: var(--blush); font-size: 0.9rem; cursor: pointer;
+    transition: background 0.2s;
+  }
+  #btn-skip-video:hover { background: rgba(232,41,91,0.15); }
+
+  /* ═══════════════ SCREEN 6: BIRTHDAY MESSAGE ═══════════════ */
+  #s-birthday {
+    background: radial-gradient(ellipse at 50% 0%, #3d0520 0%, #1a0510 55%, #0d0208 100%);
+    z-index: 5;
+    overflow-y: auto; overflow-x: hidden;
+    padding: 3rem 1.5rem 5rem;
+    justify-content: flex-start; align-items: center; gap: 0;
+  }
+  .bday-header { text-align: center; margin-bottom: 2rem; animation: fadeSlideUp 1s 0.2s both; }
+  .emoji-row { font-size: 2.2rem; margin-bottom: 0.5rem; animation: bounce 1.2s ease-in-out infinite; }
+  @keyframes bounce { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-8px);} }
+  .bday-main-title {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2.5rem, 7vw, 5rem);
+    color: var(--gold); text-shadow: 0 0 30px rgba(244,197,66,0.5); line-height: 1.1;
+  }
+  .bday-name-big {
+    font-family: 'Dancing Script', cursive;
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    color: var(--rose); text-shadow: 0 0 20px var(--shadow);
+  }
+  .bday-letter {
+    max-width: 680px; width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(232,41,91,0.2);
+    border-radius: 20px; padding: 2.5rem;
+    box-shadow: 0 0 60px rgba(0,0,0,0.4);
+  }
+  .bday-letter p {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(0.95rem, 2vw, 1.1rem);
+    line-height: 1.9; color: #f0d4dd; margin-bottom: 1.4rem;
+    opacity: 0; transform: translateY(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+  .bday-letter p.visible { opacity: 1; transform: translateY(0); }
+  .bday-letter p span.hl { color: var(--gold); font-style: italic; }
+  .bday-signature {
+    font-family: 'Dancing Script', cursive; font-size: 2rem;
+    color: var(--rose); text-align: center; margin-top: 1.5rem;
+    opacity: 0; transition: opacity 0.8s ease;
+  }
+  .bday-signature.visible { opacity: 1; }
+
+  /* floating hearts */
+  .float-heart {
+    position: fixed; pointer-events: none; font-size: 1.5rem;
+    animation: floatHeart 5s ease-in forwards; z-index: 1000;
+  }
+  @keyframes floatHeart {
+    0%   { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-85vh) scale(0.2); opacity: 0; }
+  }
+</style>
+</head>
+<body>
+
+<!-- PARTICLES -->
+<div id="particles"></div>
+
+<!-- ═══════════════════════════════════
+     SCREEN 1 — WELCOME
+════════════════════════════════════ -->
+<section class="screen active" id="s-welcome">
+  <div class="heart-burst">💖</div>
+  <div class="welcome-pre">A kuttyy gift for you </div>
+  <div class="name-reveal" id="typing-name"></div>
+  <div class="welcome-title">Welcome!</div>
+  <div class="welcome-sub">Happy Birthdayyy 🎂</div>
+  <button class="btn-start" onclick="goTo('s-countdown'); startCountdown()">
+    Begin the Journey &rarr;
+  </button>
+</section>
+
+<!-- ═══════════════════════════════════
+     SCREEN 2 — COUNTDOWN
+════════════════════════════════════ -->
+<section class="screen" id="s-countdown">
+  <div class="countdown-label">Get ready,</div>
+  <div class="countdown-name">Sanjuuu 🌹</div>
+  <div id="countdown-number">5</div>
+  <div class="countdown-sub">Going to start…</div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SCREEN 3 — PUZZLE
+════════════════════════════════════ -->
+<section class="screen" id="s-puzzle">
+  <h2>🧩 Solve Our Puzzle</h2>
+  <p class="sub">Drag the pieces into the right place to reveal our photo!</p>
+  <div id="puzzle-container"></div>
+  <div id="puzzle-hint"></div>
+</section>
+
+<!-- ═══════════════════════════════════
+     SCREEN 4 — KEY HUNT
+════════════════════════════════════ -->
+<section class="screen" id="s-keyhunt">
+  <h2>🔐 Find the Key</h2>
+  <p class="sub">A locked box holds a kutyy surprise. Click around the room to find the hidden key!</p>
+  <div id="keyhunt-area">
+    <div id="key-sprite">🗝️</div>
+  </div>
+  <div class="found-msg" id="keyhunt-msg"></div>
+  <button id="btn-use-key" onclick="openBox()">🗝️ Use the Key to Open the Box Cheloo</button>
+</section>
+
+<!-- BOX OPEN OVERLAY -->
+<div id="box-screen">
+  <div id="box-anim">🎁</div>
+  <p class="box-msg">The box is opening… 💫</p>
+</div>
+
+<!-- ═══════════════════════════════════
+     SCREEN 5 — VIDEO
+════════════════════════════════════ -->
+<section class="screen" id="s-video">
+  <h2>🎬 A Cute love story daa chellooo</h2>
+
+  <!--
+    ┌─────────────────────────────────────────────────────────┐
+    │  REPLACE  "your-video.mp4"  with your actual video file │
+    │  Keep all files in the SAME folder as this HTML file    │
+    └─────────────────────────────────────────────────────────┘
+  -->
+  <video id="birthday-video" controls>
+    <source src="https://drive.google.com/uc?export=download&id=1AeadZT6CK81nW5oLHqMfEEMthEJR59zo">
+  </video>
+
+  <div id="video-placeholder">
+    <div class="big-icon">🎥</div>
+    <p>Place your video file in the same folder as this HTML,<br>then change <strong>"your-video.mp4"</strong> to match your file name.</p>
+    <p style="font-size:0.78rem;opacity:0.6;">The video will auto-play and move on when it finishes.</p>
+  </div>
+
+  <button id="btn-skip-video" onclick="goTo('s-birthday'); startBirthdayScreen()">
+    Skip &rarr; Go to Birthday Message
+  </button>
+</section>
+
+<!-- ═══════════════════════════════════
+     SCREEN 6 — BIRTHDAY MESSAGE
+════════════════════════════════════ -->
+<section class="screen" id="s-birthday">
+  <div class="bday-header">
+    <div class="emoji-row">🎂 🌹 💖 🎉 ✨</div>
+    <div class="bday-main-title">Happy Birthday</div>
+    <div class="bday-name-big" id="bday-name-reveal"></div>
+  </div>
+
+  <div class="bday-letter" id="bday-letter">
+    <!--
+      ✏️  REPLACE these paragraphs with your own personal message.
+          Each <p> tag fades in one after another automatically.
+    -->
+    <p>My chellameyy, First of all happy to have you in my life , feeling so greatful to have you daa, Naa already neriya tym solliruken inum sollitae irupen.. you're worth more than what I lose,i seeing my happiest version because of youu.You keeping the child in me alive</p>
+    <P>inthaa birthday mattum ilaa I want us to spend our birthdays together until our death </p>
+    <p>You are the kind of person who turns ordinary moments into extraordinary memories. A quiet evening becomes magical. A random chats becomes a story I replay over and over again. Laughing with you is my favourite sound in the entire universe.</p>
+    <p>I love the way you think,talk,smile,walk,sleep,breathe etccccc. I love how you care me without ever asking for anything in return. I love everything about you,iam obsessed with you,iam addicted to you.</p>
+    <p>This few months with you has been a gift I never expected. You have made me laugh on the hardest days, held me close when I needed it most, and reminded me — simply by existing — that <span class="hl">life is genuinely, beautifully worth it.</span></p>
+    <p> Like in that video i want to spend my whole life with you.</p>
+    <p>On your birthday, I wish you everything you deserve: joy that fills every corner of your soul, dreams that keep growing bolder, and a love that never dims — least of all mine for you.</p>
+    <p> <b> COMRADE </b> the one who fights on the same side as you in a war.<span class="h1">Let me be your comrade!!!</span></p>
+    <p>Thank you for being my person. Thank you for every inside joke, every late-night conversation, every gentle squeeze of the hand, every moment you chose to be here with me.</p>
+    <p>Here's to you — <span class="hl">endlessly wonderful, always loved, forever cherished.</span> Happy Birthday, my love. 🌹</p>
+  </div>
+
+  <div class="bday-signature" id="bday-sig">— Forever yours, with all my heart 💖</div>
+</section>
+
+<!--
+  🎵 BACKGROUND MUSIC for the final screen
+  Replace "your-background-music.mp3" with your actual music file.
+-->
+<audio id="bg-music" loop>
+  <source src="metro proposal.mpeg" type="audio/mpeg">
+</audio>
+
+<script>
+/* ═══════════════════════════════════════════
+   CONFIG — change these to personalise
+═══════════════════════════════════════════ */
+const NAME      = 'sanjuuu';          // Partner's name
+const PHOTO_SRC = 'us.jpeg'; // Couple photo (same folder as this file)
+const GRID      = 4;                // 4 = 4×4 puzzle (16 pieces)
+const PIECE_PX  = 80;               // piece size in pixels
+
+/* ═══════════════════════════════════════════
+   PARTICLES
+═══════════════════════════════════════════ */
+const pColors = ['#e8295b','#f7c5d3','#f4c542','#c8920a','#fff0f4'];
+function spawnParticle() {
+  const el = document.createElement('div');
+  el.className = 'particle';
+  const s = 4 + Math.random() * 8;
+  el.style.cssText = `
+    width:${s}px; height:${s}px;
+    left:${Math.random()*100}%;
+    background:${pColors[Math.floor(Math.random()*pColors.length)]};
+    animation-duration:${7+Math.random()*10}s;
+    animation-delay:${Math.random()*4}s;
+  `;
+  document.getElementById('particles').appendChild(el);
+  setTimeout(() => el.remove(), 18000);
+}
+setInterval(spawnParticle, 550);
+
+/* ═══════════════════════════════════════════
+   SCREEN SWITCHER
+═══════════════════════════════════════════ */
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+/* ═══════════════════════════════════════════
+   SCREEN 1 — TYPING NAME
+═══════════════════════════════════════════ */
+let ni = 0;
+const tyEl = document.getElementById('typing-name');
+(function typeName() {
+  tyEl.textContent = NAME.slice(0, ni) + (ni < NAME.length ? '|' : '');
+  if (ni <= NAME.length) { ni++; setTimeout(typeName, 120); }
+})();
+
+/* ═══════════════════════════════════════════
+   SCREEN 2 — COUNTDOWN
+═══════════════════════════════════════════ */
+let countdownStarted = false;
+function startCountdown() {
+  if (countdownStarted) return;
+  countdownStarted = true;
+  let n = 5;
+  const el = document.getElementById('countdown-number');
+  const tick = () => {
+    el.textContent = n === 0 ? '🎉' : n;
+    el.style.transform = 'scale(1.35)';
+    setTimeout(() => { el.style.transform = 'scale(1)'; }, 200);
+    if (n === 0) {
+      setTimeout(() => { goTo('s-puzzle'); initPuzzle(); }, 700);
+    } else {
+      n--;
+      setTimeout(tick, 1000);
+    }
+  };
+  setTimeout(tick, 400);
+}
+
+/* ═══════════════════════════════════════════
+   SCREEN 3 — PUZZLE
+═══════════════════════════════════════════ */
+let puzzleSolved = false;
+let slots = [], dragEl = null, fromSlot = null;
+
+function initPuzzle() {
+  if (puzzleSolved) return;
+  const container = document.getElementById('puzzle-container');
+  container.innerHTML = '';
+  slots = [];
+
+  // Shuffle indices
+  const order = Array.from({length: GRID * GRID}, (_, i) => i);
+  for (let i = order.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [order[i], order[j]] = [order[j], order[i]];
+  }
+
+  const TOTAL = GRID * GRID;
+  // Create slots
+  for (let i = 0; i < TOTAL; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'puzzle-slot';
+    slot.dataset.slot = i;
+    container.appendChild(slot);
+    slots.push(slot);
+  }
+
+  // Create pieces
+  for (let i = 0; i < TOTAL; i++) {
+    const piece = document.createElement('div');
+    piece.className = 'puzzle-piece';
+    const px = (order[i] % GRID) * PIECE_PX;
+    const py = Math.floor(order[i] / GRID) * PIECE_PX;
+    piece.style.background = `url('${PHOTO_SRC}') -${px}px -${py}px / ${GRID * PIECE_PX}px ${GRID * PIECE_PX}px #1a0510`;
+    piece.dataset.correct = order[i];
+    piece.dataset.slot    = i;
+    slots[i].appendChild(piece);
+    bindDrag(piece);
+  }
+}
+
+function bindDrag(piece) {
+  piece.addEventListener('mousedown', onDragStart);
+  piece.addEventListener('touchstart', onDragStart, { passive: true });
+}
+
+function onDragStart(e) {
+  dragEl   = e.currentTarget;
+  fromSlot = +dragEl.dataset.slot;
+  dragEl.classList.add('dragging');
+  document.addEventListener('mousemove', onDragMove);
+  document.addEventListener('mouseup',   onDragEnd);
+  document.addEventListener('touchmove', onDragMove, { passive: false });
+  document.addEventListener('touchend',  onDragEnd);
+}
+
+function onDragMove(e) {
+  if (!dragEl) return;
+  e.preventDefault && e.preventDefault();
+  const t = e.touches ? e.touches[0] : e;
+  dragEl.style.cssText += `position:fixed;left:${t.clientX - PIECE_PX/2}px;top:${t.clientY - PIECE_PX/2}px;z-index:999;`;
+}
+
+function onDragEnd(e) {
+  if (!dragEl) return;
+  const t = e.changedTouches ? e.changedTouches[0] : e;
+  dragEl.classList.remove('dragging');
+  dragEl.style.position = dragEl.style.left = dragEl.style.top = dragEl.style.zIndex = '';
+
+  const els = document.elementsFromPoint(t.clientX, t.clientY);
+  const target = els.find(el => el.classList.contains('puzzle-slot') && el !== dragEl.parentElement);
+  if (target) {
+    const toSlot = +target.dataset.slot;
+    const resident = target.querySelector('.puzzle-piece');
+    if (resident) { slots[fromSlot].appendChild(resident); resident.dataset.slot = fromSlot; }
+    target.appendChild(dragEl);
+    dragEl.dataset.slot = toSlot;
+    checkPuzzle();
+  }
+
+  document.removeEventListener('mousemove', onDragMove);
+  document.removeEventListener('mouseup',   onDragEnd);
+  document.removeEventListener('touchmove', onDragMove);
+  document.removeEventListener('touchend',  onDragEnd);
+  dragEl = null;
+}
+
+function checkPuzzle() {
+  let correct = 0;
+  slots.forEach((slot, i) => {
+    const p = slot.querySelector('.puzzle-piece');
+    const ok = p && +p.dataset.correct === i;
+    slot.classList.toggle('correct-slot', !!ok);
+    if (ok) correct++;
+  });
+  const total = GRID * GRID;
+  document.getElementById('puzzle-hint').textContent =
+    correct === total ? '✨ Perfect! You did it!' : `${correct} / ${total} pieces in place…`;
+  if (correct === total && !puzzleSolved) {
+    puzzleSolved = true;
+    setTimeout(() => { goTo('s-keyhunt'); initKeyHunt(); }, 1200);
+  }
+}
+
+/* ═══════════════════════════════════════════
+   SCREEN 4 — KEY HUNT
+═══════════════════════════════════════════ */
+const ROOM_OBJECTS = [
+  { emoji: '🛋️', x:  5, y: 58, label: 'sofa'      },
+  { emoji: '🌵', x: 75, y:  8, label: 'cactus'     },
+  { emoji: '🪴', x: 15, y:  8, label: 'plant'      },
+  { emoji: '📦', x: 58, y: 58, label: 'box'        },
+  { emoji: '🪞', x: 38, y:  5, label: 'mirror'     },
+  { emoji: '🕯️', x: 82, y: 33, label: 'candle'     },
+  { emoji: '📚', x:  3, y: 33, label: 'bookshelf'  },
+  { emoji: '🎒', x: 48, y: 55, label: 'bag'        },
+  { emoji: '🪑', x: 28, y: 55, label: 'chair'      },
+];
+let keyFound = false;
+
+function initKeyHunt() {
+  if (keyFound) return;
+  const area = document.getElementById('keyhunt-area');
+  area.querySelectorAll('.room-object').forEach(o => o.remove());
+  document.getElementById('keyhunt-msg').textContent   = '';
+  document.getElementById('btn-use-key').style.display = 'none';
+  document.getElementById('key-sprite').style.display  = 'none';
+
+  const hiddenIdx = Math.floor(Math.random() * ROOM_OBJECTS.length);
+
+  ROOM_OBJECTS.forEach((obj, idx) => {
+    const el = document.createElement('div');
+    el.className  = 'room-object';
+    el.textContent = obj.emoji;
+    el.style.left  = obj.x + '%';
+    el.style.top   = obj.y + '%';
+    el.addEventListener('click', () => handleObjectClick(idx, hiddenIdx, el, obj));
+    area.appendChild(el);
+  });
+}
+
+function handleObjectClick(idx, hiddenIdx, el, obj) {
+  if (keyFound) return;
+  if (idx === hiddenIdx) {
+    keyFound = true;
+    const key = document.getElementById('key-sprite');
+    key.style.left    = (obj.x + 5) + '%';
+    key.style.top     = (obj.y + 3) + '%';
+    key.style.display = 'block';
+    document.getElementById('keyhunt-msg').textContent =
+      '🗝️ You found it! The key was hiding under the ' + obj.label + '!';
+    setTimeout(() => { document.getElementById('btn-use-key').style.display = 'block'; }, 900);
+  } else {
+    el.animate(
+      [{ transform:'scale(1)' }, { transform:'scale(0.75)' }, { transform:'scale(1)' }],
+      { duration: 300 }
+    );
+    document.getElementById('keyhunt-msg').textContent = 'Nothing here… keep looking! 🔍';
+  }
+}
+
+/* ═══════════════════════════════════════════
+   BOX OPENING
+═══════════════════════════════════════════ */
+function openBox() {
+  const boxScreen = document.getElementById('box-screen');
+  boxScreen.style.display = 'flex';
+  setTimeout(() => {
+    boxScreen.style.display = 'none';
+    goTo('s-video');
+    setupVideo();
+  }, 2600);
+}
+
+/* ═══════════════════════════════════════════
+   SCREEN 5 — VIDEO
+═══════════════════════════════════════════ */
+function setupVideo() {
+  const vid   = document.getElementById('birthday-video');
+  const ph    = document.getElementById('video-placeholder');
+  vid.load();
+  vid.oncanplay = () => { ph.style.display = 'none'; vid.style.display = 'block'; vid.play(); };
+  vid.onerror   = () => { ph.style.display = 'flex'; vid.style.display = 'none'; };
+  vid.onended   = () => { goTo('s-birthday'); startBirthdayScreen(); };
+}
+
+/* ═══════════════════════════════════════════
+   SCREEN 6 — BIRTHDAY MESSAGE
+═══════════════════════════════════════════ */
+function startBirthdayScreen() {
+  // Type the name
+  const nameEl = document.getElementById('bday-name-reveal');
+  let ni2 = 0;
+  (function typeBdayName() {
+    nameEl.textContent = NAME.slice(0, ni2);
+    if (ni2 <= NAME.length) { ni2++; setTimeout(typeBdayName, 130); }
+  })();
+
+  // Fade-in paragraphs one by one
+  document.querySelectorAll('.bday-letter p').forEach((p, i) => {
+    setTimeout(() => p.classList.add('visible'), 700 + i * 650);
+  });
+  const numParas = document.querySelectorAll('.bday-letter p').length;
+  setTimeout(() => {
+    document.getElementById('bday-sig').classList.add('visible');
+  }, 700 + numParas * 650);
+
+  // Background music
+  const music = document.getElementById('bg-music');
+  music.volume = 0.35;
+  music.play().catch(() => {}); // browsers may block autoplay — user interaction helps
+
+  // Floating hearts
+  spawnHearts();
+}
+
+function spawnHearts() {
+  const emojis = ['💖','💕','🌹','✨','💝','💞','🌸','🌺','🎀'];
+  let count = 0;
+  const iv = setInterval(() => {
+    const h = document.createElement('div');
+    h.className   = 'float-heart';
+    h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+    h.style.left  = Math.random() * 100 + 'vw';
+    h.style.bottom = '-2rem';
+    h.style.animationDuration = (4 + Math.random() * 4) + 's';
+    h.style.fontSize = (1 + Math.random() * 1.5) + 'rem';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 8000);
+    if (++count > 80) clearInterval(iv);
+  }, 650);
+}
+</script>
+</body>
+</html>
